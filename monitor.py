@@ -33,7 +33,7 @@ def check_items():
     # Message 
     message = 'The newest item is: ' + item_name + ' for ' + item_price
     # Return the number of items
-    return len(message)
+    return message
 
 # Function to send an email
 def send_mail():
@@ -48,9 +48,9 @@ def send_mail():
     # SMTP server port
     port = 587
     # Subject of the email
-    subject = check_items()
+    subject =  'New item on cars.bg'
     # Body of the email
-    body = 'Check the link: ' + str(URL)
+    body = check_items() + '\n' + 'Check the link: ' + str(URL)
     # Message to be sent
     message = f'Subject: {subject}\n\n{body}'
     # Create a SMTP session
@@ -84,7 +84,7 @@ def check_change():
 # Main function
 def main():
     # Check if the number of items has changed
-    send_mail()
+    check_change()
 
 # Run the main function
 if __name__ == '__main__':
