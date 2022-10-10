@@ -8,6 +8,13 @@ import time
 # URL of the web page to be monitored
 URL = "https://www.cars.bg/carslist.php?subm=1&add_search=1&typeoffer=1&fuelId%5B%5D=1&fuelId%5B%5D=3&last=3&priceTo=6000&conditions%5B%5D=4&conditions%5B%5D=1&locationId=4&radius=3"#input('Enter the URL of the web page to be monitored: ')
 
+# Email address of the sender
+sender = input('Enter your email address: ')
+# Email address of the receiver
+receiver = input('Enter the email address of the receiver: ')
+# Password of the sender's email address
+password = input('Enter the password of the sender\'s email address: ')
+
 # Headers to be sent with the request
 headers = {"User-Agent": 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
 
@@ -31,13 +38,13 @@ def check_items():
 # Function to send an email
 def send_mail():
     # Email address of the sender
-    sender = 'bgboy089@gmail.com' #input('Enter your email address: ')
+    global sender
     # Email address of the receiver
-    receiver = 'adrianvelev99@gmail.com' #input('Enter the email address of the receiver: ')
+    global receiver
     # Password of the sender's email address
-    password = 'EvtinaGoogleParola%' #input('Enter the password of the sender\'s email address: ')
+    global password
     # SMTP server address
-    smtp_server = 'smtp.gmail.com'
+    smtp_server = 'smtp.office365.com'
     # SMTP server port
     port = 587
     # Subject of the email
@@ -56,6 +63,8 @@ def send_mail():
     session.sendmail(sender, receiver, message)
     # Terminating the session
     session.quit()
+
+    print('Email sent!')
     
 
 # Function to check if the number of items has changed
@@ -71,12 +80,11 @@ def check_change():
         if items != new_items:
             send_mail()
             items = new_items
-            print('Email sent!')
 
 # Main function
 def main():
     # Check if the number of items has changed
-    check_items()
+    send_mail()
 
 # Run the main function
 if __name__ == '__main__':
